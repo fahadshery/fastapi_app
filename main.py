@@ -24,6 +24,7 @@ class User(BaseModel):
     name: str
     email: str
     bio: Optional[str]
+    country: str | None = None
     is_active: bool
 
 

@@ -1,6 +1,9 @@
 from typing import Optional, List
 from fastapi import FastAPI, Path, Query
 from pydantic import BaseModel
+from api.routers.users import router
+from api.routers.sections import router_s
+from api.routers.courses import router_c
 
 app = FastAPI(
     title="Fahad's Test Fast API App",
@@ -17,38 +20,11 @@ app = FastAPI(
     },
 )
 
-in_memory_users_list = []
-
-
-class User(BaseModel):
-    name: str
-    email: str
-    bio: Optional[str]
-    country: str | None = None
-    is_active: bool
+app.include_router(router)
+app.include_router(router_s)
+app.include_router(router_c)
 
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World! This is Fahad"}
-
-
-@app.get("/user", response_model=List[User])
-async def get_user():
-    return in_memory_users_list
-
-
-@app.get("/user/{id}")
-async def get_user(
-    id: int = Path(..., description="Enter User ID", ge=1),
-    test_var: str = Query(
-        None, max_length=3, description="Test var, only enter max 3 letters"
-    ),
-):
-    return {"user_id": in_memory_users_list[id], "test_var": test_var}
-
-
-@app.post("/user")
-async def create_user(user: User):
-    in_memory_users_list.append(user)
-    return {"message": "Your user has been added"}
+    return {"message": "Hello world"}

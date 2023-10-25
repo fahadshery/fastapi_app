@@ -1,8 +1,8 @@
 from typing import Optional, List
-import fastapi
+from fastapi import APIRouter
 from pydantic import BaseModel
 
-router = fastapi.APIRouter()
+router = APIRouter()
 
 in_memory_users_list = []
 

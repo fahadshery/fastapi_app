@@ -1,6 +1,6 @@
-import fastapi
+from fastapi import APIRouter
 
-router_c = fastapi.APIRouter()
+router_c = APIRouter()
 
 
 @router_c.get("/courses/{id}")

@@ -1,6 +1,6 @@
-import fastapi
+from fastapi import APIRouter
 
-router_s = fastapi.APIRouter()
+router_s = APIRouter()
 
 
 @router_s.get("/sections/{id}")

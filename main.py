@@ -1,9 +1,12 @@
-from typing import Optional, List
-from fastapi import FastAPI, Path, Query
-from pydantic import BaseModel
+from fastapi import FastAPI
 from api.routers.users import router
 from api.routers.sections import router_s
 from api.routers.courses import router_c
+from db.db_setup import engine
+from db.models import user, course
+
+user.Base.metadata.create_all(bind=engine)
+course.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Fahad's Test Fast API App",
